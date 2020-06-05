@@ -1,0 +1,52 @@
+
+.App {
+  display: flex;
+  flex-direction: row;
+}
+
+.todoList {
+  border: 2px solid;
+  width: 300px;
+  margin: 0 auto;
+  margin-right: 20px;
+  background-color: #f0ccbc;
+}
+
+.todoList-header {
+  padding: 10px;
+  position: relative;
+}
+
+.todoList-task {
+  opacity: 1;
+}
+.filter-active {background: red;}
+.btn:hover {background: yellow;}
+.btn:active {background: green;}
+.error {
+  border-color: red;
+}
+.done {
+  opacity: 0.5;
+}
+.taskContainer{
+  border-bottom: 2px dashed;
+  display: flex;
+  justify-content: space-between;
+margin-bottom: 15px;
+}
+.deleterTodo{
+  position: absolute;
+top: 5px;
+  right: 5px;
+}
+
+.idTodo {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
+
+.deleterTask{
+  margin-right: 5px;
+}
