@@ -3,13 +3,13 @@ export type TodoType = {
     title: string
     addedDate: string
     order: number
-    // tasks:Array<>
+    tasks:Array<TaskType>
 }
 
 export type TaskType = {
     description: string
     title: string
-    completed: boolean
+    completed?: boolean
     status: number
     priority: number
     startDate: string
@@ -20,9 +20,11 @@ export type TaskType = {
     addedDate: string
 }
 
+
 export type UpadateTaskType={
     title?:string
-    status: string
+    status?: number
+    priority?: number
 }
 
 
