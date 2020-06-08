@@ -46,13 +46,13 @@ const api = {
         return instance.get('')
     },
 
-    getTasks(todolistId) {
+    getTasks(todolistId:string) {
         debugger
         return instance.get(
             `${todolistId}/tasks`,
         )
     },
-    createTask(todolistId, newText) {
+    createTask(todolistId:string, newText:string) {
         return instance.post(`${todolistId}/tasks`,
             {title: newText}
         )
