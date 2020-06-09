@@ -2,14 +2,14 @@ import React from 'react';
 import './App.css';
 
 
-import PropTypes from "prop-types";
 import TodoList from "./TodoList";
 import AddNewItemForm from "./AddNewItemForm";
 import {connect} from "react-redux";
 import {addTodoList, getTodolists} from "./reducer";
-import Preloader from "./Preloader";
 import {AppStateType} from "./store";
 import {TodoType} from "./types/entities";
+import Preloader from "./Preloader";
+
 
 type MapDispatchToPropsType={
     getTodolists:()=>void
@@ -23,12 +23,6 @@ type MapStateToPropsType={
 
 
 class App extends React.Component<MapDispatchToPropsType&MapStateToPropsType>{
-    // state = {
-    //     todolists: [
-    //         // {id: "01", title: "Dima"},
-    //     ]
-    // }
-
 
     componentDidMount = () => {
         this.restoreState()
@@ -41,7 +35,7 @@ class App extends React.Component<MapDispatchToPropsType&MapStateToPropsType>{
     }
 
 
-    addTodoList = (newTodolistName) => {
+    addTodoList = (newTodolistName:string) => {
         // вызов колбека который нам предоставил connect для вызова санки
         this.props.addTodoList(newTodolistName)
 
@@ -96,8 +90,3 @@ const mapStateToProps = (state:AppStateType):MapStateToPropsType => {
 const ConnectedApp = connect<MapStateToPropsType, MapDispatchToPropsType,{},AppStateType>(mapStateToProps, {addTodoList, getTodolists})(App);
 
 export default ConnectedApp;
-
-
-// App.propTypes = {
-//     // _________: PropTypes.string
-// };

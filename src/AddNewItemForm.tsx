@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, KeyboardEvent} from "react";
 
 
 type StateType = {
@@ -38,7 +38,7 @@ class AddNewItemForm extends React.Component<OwnPropsType, StateType> {
         })
     };
 
-    onKeyPress = (e) => {
+    onKeyPress = (e:KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
             this.onAddItemClick()
         }

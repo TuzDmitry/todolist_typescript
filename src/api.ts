@@ -1,12 +1,11 @@
 import axios from "axios";
-import {TaskType, TodoType} from "./types/entities";
+import {TaskType, TodoType, UpadateTaskType} from "./types/entities";
 
 const instance = axios.create({
     withCredentials: true,
     headers: {"API-KEY": "99d1b1eb-87ca-41b0-b4eb-5da7df0ab7de"},
     baseURL: `https://social-network.samuraijs.com/api/1.1/todo-lists/`
 })
-
 
 
 // type CreateTodoType = {
@@ -30,53 +29,62 @@ const instance = axios.create({
 //     data: {}
 // }
 
-
-type CommonApiType<T>={
+///описываем, что нам возвращает сервер из апишки в промисе
+type CommonApiType<T> = {
     resultCode: number
     messages: Array<string>
     data: T
 }
 
-const api = {
-    createTodolist(newTodolistName:string) {
-        return instance.post<CommonApiType<{item:TodoType}>>('', {title: newTodolistName}
-        )
-    },
-    getTodolists() {
-        return instance.get('')
-    },
+type GetTaskType={
+    items: Array<TaskType>
+    totalCount: number
+    error: string | null
+}
 
-    getTasks(todolistId:string) {
-        debugger
-        return instance.get(
-            `${todolistId}/tasks`,
+const api = {
+
+    getTodolists() {
+        return instance.get<Array<TodoType>>(
+            '')
+    },
+    createTodolist(newTodolistName: string) {
+        return instance.post<CommonApiType<{ item: TodoType }>>(
+            '',
+            {title: newTodolistName}
         )
     },
-    createTask(todolistId:string, newText:string) {
-        return instance.post(`${todolistId}/tasks`,
-            {title: newText}
-        )
-    },
-    changeTask(task, newPropsObj) {
-        return instance.put<CommonApiType<{item:TaskType}>>(
-            `${task.todoListId}/tasks/${task.id}`,
-            {...task, ...newPropsObj}
-        )
-    },
-    deleteTodolist(todolistId) {
+    deleteTodolist(todolistId: string) {
         return instance.delete<CommonApiType<{}>>(
             `${todolistId}`
         )
     },
-    deleteTask(todolistId, taskId) {
-        return instance.delete(`${todolistId}/tasks/${taskId}`
+    changeTodoTitle(todolistId: string, newtitle: string) {
+        return instance.put<CommonApiType<{ item: TodoType }>>(
+            `${todolistId}`,
+            {title: newtitle}
         )
     },
 
-    changeTodoTitle(todolistId, newtitle) {
-        return instance.put(
-            `${todolistId}`,
-            {title: newtitle}
+    getTasks(todolistId: string) {
+        // debugger
+        return instance.get<GetTaskType>(
+            `${todolistId}/tasks`,
+        )
+    },
+    createTask(todolistId: string, newText: string) {
+        return instance.post<CommonApiType<{ item: TaskType }>>(`${todolistId}/tasks`,
+            {title: newText}
+        )
+    },
+    deleteTask(todolistId: string, taskId: string) {
+        return instance.delete<CommonApiType<{}>>(`${todolistId}/tasks/${taskId}`
+        )
+    },
+    changeTask(task: TaskType, newPropsObj: UpadateTaskType) {
+        return instance.put<CommonApiType<{ item: TaskType }>>(
+            `${task.todoListId}/tasks/${task.id}`,
+            {...task, ...newPropsObj}
         )
     }
 }

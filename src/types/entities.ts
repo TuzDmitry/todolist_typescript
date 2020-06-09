@@ -3,10 +3,9 @@ export type TodoType = {
     title: string
     addedDate: string
     order: number
-    tasks:Array<TaskType>
+    tasks: Array<TaskType>
 }
-
-export type TaskType = {
+    export type TaskType = {
     description: string
     title: string
     completed?: boolean
@@ -21,8 +20,8 @@ export type TaskType = {
 }
 
 
-export type UpadateTaskType={
-    title?:string
+export type UpadateTaskType = {
+    title?: string
     status?: number
     priority?: number
 }
