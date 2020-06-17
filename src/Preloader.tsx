@@ -8,9 +8,11 @@ type OwnPropsType={
 
 const Preloader = (props:OwnPropsType) => {
     return (
-        props.isPreloader&&<div>
+        <>
+            {props.isPreloader && <div>
             <img src={preloader} alt=""/>
-        </div>
+        </div>}
+        </>
     )
 }
 

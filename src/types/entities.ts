@@ -23,7 +23,7 @@ export type TodoType = {
 export type UpadateTaskType = {
     title?: string
     status?: number
-    priority?: number
+    priority?: string
 }
 
 

@@ -101,7 +101,7 @@ class TodoList extends React.Component <OwnPropsType&MapDispatchToPropsType&MapS
         this.changeTask(task, {title: newtitle})
     }
 
-    changePriority = (task:TaskType, newPriorityValue:number) => {
+    changePriority = (task:TaskType, newPriorityValue:string) => {
         this.changeTask(task, {priority: newPriorityValue})
     }
 
@@ -146,7 +146,8 @@ class TodoList extends React.Component <OwnPropsType&MapDispatchToPropsType&MapS
                             }
                         })}
                     />
-                    <TodoListFooter changeFilter={this.changeFilter} filterValue={this.state.filterValue}/>
+                    <TodoListFooter changeFilter={this.changeFilter}
+                                    filterValue={this.state.filterValue}/>
                 </div>
 
             </div>

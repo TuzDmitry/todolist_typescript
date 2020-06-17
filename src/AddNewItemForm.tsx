@@ -16,6 +16,7 @@ class AddNewItemForm extends React.Component<OwnPropsType, StateType> {
         error: true,
         title: ""
     }
+
     onAddItemClick = () => {
 
         let newText = this.state.title;

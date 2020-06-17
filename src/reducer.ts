@@ -84,7 +84,7 @@ export const reducer = (state: InitialStateType = initialState, action: TodoActi
             return {
                 ...state,
                 todolists: state.todolists.map(todo => {
-                    if (todo.id != action.todoListId) {
+                    if (todo.id !== action.todoListId) {
                         return todo
                     } else {
                         return {...todo, tasks: action.tasks}

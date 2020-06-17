@@ -1,7 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, {ChangeEvent} from "react";
 
-class TodoListTitle extends React.Component {
+type OwnPropsType={
+    title:string
+    id:string
+    changeTodoTitle:(id:string, memoryTitle:string)=>void
+}
+
+class TodoListTitle extends React.Component <OwnPropsType>{
 
     state = {
         editMode: false,
@@ -23,14 +28,13 @@ class TodoListTitle extends React.Component {
             editMode: false
         })
     }
-    onTitleChanged = (e) => {
+    onTitleChanged = (e:ChangeEvent<HTMLInputElement>) => {
         this.setState({
             memoryTitle: e.currentTarget.value
         })
     }
-n
+
     render = () => {
-        // let classNameInput = this.state.error ? "error" : "";
         return (
             <>
 
@@ -49,7 +53,3 @@ n
 }
 
 export default TodoListTitle;
-
-// AddNewItemForm.propTypes = {
-//     // ________: PropTypes.____
-// };

@@ -1,7 +1,12 @@
 import React from "react";
-import PropTypes from "prop-types";
 
-class TodoListFooter extends React.Component {
+type OwnPropsType={
+    changeFilter:(filter:string)=>void
+    filterValue:string
+}
+
+
+class TodoListFooter extends React.Component <OwnPropsType> {
     state={
         isHidden: false
     }
@@ -35,7 +40,3 @@ class TodoListFooter extends React.Component {
 }
 
 export default TodoListFooter;
-
-TodoListFooter.propTypes = {
-    filterValue: PropTypes.string
-};
