@@ -53,7 +53,6 @@ class TodoList extends React.Component <OwnPropsType&MapDispatchToPropsType&MapS
     state = {
         tasks: [
             // {id: 1, title: "JS", isDone: true, priority: 'low'},
-            // {id: 2, title: "HTML", isDone: true, priority: 'high'},
 
         ], filterValue: "All"
     }

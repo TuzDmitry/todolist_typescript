@@ -55,8 +55,6 @@ class App extends React.Component<MapDispatchToPropsType&MapStateToPropsType>{
                 </div>
                 <div className="App">
                     {todolists}
-                    {/*<TodoList id={"01"}/>*/}
-                    {/*<TodoList id={"02"}/>*/}
                 </div>
             </>
 
@@ -71,20 +69,6 @@ const mapStateToProps = (state:AppStateType):MapStateToPropsType => {
     }
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         addTodoList: (newTodolistName) => {
-//             const thunk = addTodoList(newTodolistName)
-//             dispatch(thunk)
-//         },
-//         getTodolists: () => {
-//             const thunk = getTodolists()
-//             dispatch(thunk)
-//         }
-//     }
-// }
-
-// const ConnectedApp = connect(mapStateToProps, mapDispatchToProps)(App);
 
 
 const ConnectedApp = connect<MapStateToPropsType, MapDispatchToPropsType,{},AppStateType>(mapStateToProps, {addTodoList, getTodolists})(App);

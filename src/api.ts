@@ -67,7 +67,6 @@ const api = {
     },
 
     getTasks(todolistId: string) {
-        // debugger
         return instance.get<GetTaskType>(
             `${todolistId}/tasks`,
         )
