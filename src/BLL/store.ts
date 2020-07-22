@@ -1,9 +1,11 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import {reducer} from "./reducer";
+import {TodoListReducer} from "./TodoListReducer";
 import thunkMiddleware from 'redux-thunk'
+import { AuthReducer } from "./AuthReducer";
 
 let rootReducer=combineReducers({
-    todoPage:reducer
+    auth: AuthReducer,
+    todoPage:TodoListReducer
 })
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 ///// typeof rootReducer-это тип нашей функции редьюсер, которая возвращает наш стейт

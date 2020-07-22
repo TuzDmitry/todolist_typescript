@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import '../App.css';
 import AddNewItemForm from "./AddNewItemForm";
 import TodoListTasks from "./TodoListTasks";
 import TodoListFooter from "./TodoListFooter";
@@ -8,11 +8,10 @@ import {connect} from "react-redux";
 
 import {
      changeTodolist, deleteTodolist,
-    getTasks, addTask, deleteTask, changeTask
-} from "./reducer";
-import Preloader from "./Preloader";
-import {TaskType, UpadateTaskType} from "./types/entities";
-import {AppStateType} from "./store";
+    getTasks, addTask, deleteTask, changeTask} from "../../BLL/TodoListReducer";
+import Preloader from "../common/Preloader";
+import {TaskType, UpadateTaskType} from "../../types/entities";
+import {AppStateType} from "../../BLL/store";
 
 
 type OwnPropsType={

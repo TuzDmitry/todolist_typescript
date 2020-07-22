@@ -1,5 +1,5 @@
-import api from "./api";
-import {TaskType, TodoType, UpadateTaskType} from "./types/entities";
+import api from "../api";
+import {TaskType, TodoType, UpadateTaskType} from "../types/entities";
 import {Dispatch} from "redux";
 
 export const ADD_TODOLIST = "TodoList/Reducer/ADD_TODOLIST"
@@ -51,7 +51,7 @@ const initialState: InitialStateType = {
 }
 
 
-export const reducer = (state: InitialStateType = initialState, action: TodoActionTypes): InitialStateType => {
+export const TodoListReducer = (state: InitialStateType = initialState, action: TodoActionTypes): InitialStateType => {
 
     let newTodolists;
     switch (action.type) {
@@ -263,6 +263,7 @@ export const changePreloaderTasksAC = (isPreloader: boolean): ChangePreloaderTas
 export const getTodolists = () => {
     return (dispatch: Dispatch<TodoActionTypes>) => {
         dispatch(changePreloaderTodoAC(true))
+        debugger
         api.getTodolists()
             .then(res => {
                 dispatch(setTodoListsSuccess(res.data))

@@ -1,6 +1,6 @@
 import React from "react";
 import TodoListTask from "./TodoListTask";
-import {TaskType} from "./types/entities";
+import {TaskType} from "../../types/entities";
 
 
 type OwnPropsType={

@@ -1,28 +1,30 @@
 import React from 'react';
 import './App.css';
 
-
-import TodoList from "./TodoList";
-import AddNewItemForm from "./AddNewItemForm";
+import TodoList from "./TodoList/TodoList";
+import AddNewItemForm from "./TodoList/AddNewItemForm";
 import {connect} from "react-redux";
-import {addTodoList, getTodolists} from "./reducer";
-import {AppStateType} from "./store";
-import {TodoType} from "./types/entities";
-import Preloader from "./Preloader";
+import {addTodoList, getTodolists} from "../BLL/TodoListReducer";
+import {AppStateType} from "../BLL/store";
+import Preloader from './common/Preloader';
+import {TodoType} from "../types/entities";
 
 
-type MapDispatchToPropsType={
-    getTodolists:()=>void
-    addTodoList:(title:string)=>void
+
+type MapDispatchToPropsType = {
+    getTodolists: () => void
+    addTodoList: (title: string) => void
+
 }
 
-type MapStateToPropsType={
+type MapStateToPropsType = {
     todolists: Array<TodoType>
     isPreloaderTodo: boolean
+    isAuth:boolean
 }
 
 
-class App extends React.Component<MapDispatchToPropsType&MapStateToPropsType>{
+class App extends React.Component<MapDispatchToPropsType & MapStateToPropsType> {
 
     componentDidMount = () => {
         this.restoreState()
@@ -35,7 +37,7 @@ class App extends React.Component<MapDispatchToPropsType&MapStateToPropsType>{
     }
 
 
-    addTodoList = (newTodolistName:string) => {
+    addTodoList = (newTodolistName: string) => {
         // вызов колбека который нам предоставил connect для вызова санки
         this.props.addTodoList(newTodolistName)
 
@@ -48,7 +50,7 @@ class App extends React.Component<MapDispatchToPropsType&MapStateToPropsType>{
             return <TodoList key={tl.id} id={tl.id} title={tl.title} tasks={tl.tasks}/>
         })
         return (
-            <>
+            <div style={{backgroundColor: "red"}}>
                 <Preloader isPreloader={this.props.isPreloaderTodo}/>
                 <div>
                     <AddNewItemForm addItem={this.addTodoList}/>
@@ -56,21 +58,24 @@ class App extends React.Component<MapDispatchToPropsType&MapStateToPropsType>{
                 <div className="App">
                     {todolists}
                 </div>
-            </>
-
-        );
+            </div>
+        )
     }
 }
 
-const mapStateToProps = (state:AppStateType):MapStateToPropsType => {
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         todolists: state.todoPage.todolists,
-        isPreloaderTodo: state.todoPage.isPreloaderTodo
+        isPreloaderTodo: state.todoPage.isPreloaderTodo,
+        isAuth: state.auth.isAuth
     }
 }
 
 
+const ConnectedApp = connect<MapStateToPropsType, MapDispatchToPropsType, {}, AppStateType>(mapStateToProps, {
+    addTodoList,
+    getTodolists
 
-const ConnectedApp = connect<MapStateToPropsType, MapDispatchToPropsType,{},AppStateType>(mapStateToProps, {addTodoList, getTodolists})(App);
+})(App);
 
 export default ConnectedApp;

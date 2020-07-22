@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from "react"
-import {TaskType} from "./types/entities";
+import {TaskType} from "../../types/entities";
 
 type OwnPropsType = {
     deleteTask: (taskId: string) => void
