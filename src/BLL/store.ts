@@ -2,10 +2,12 @@ import {applyMiddleware, combineReducers, createStore} from "redux";
 import {TodoListReducer} from "./TodoListReducer";
 import thunkMiddleware from 'redux-thunk'
 import { AuthReducer } from "./AuthReducer";
+import {reducer as formReducer} from "redux-form"
 
 let rootReducer=combineReducers({
     auth: AuthReducer,
-    todoPage:TodoListReducer
+    todoPage:TodoListReducer,
+    form:formReducer
 })
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 ///// typeof rootReducer-это тип нашей функции редьюсер, которая возвращает наш стейт

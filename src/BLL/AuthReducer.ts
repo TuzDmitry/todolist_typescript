@@ -1,5 +1,6 @@
 import {Dispatch} from "redux";
 import {API} from "../DAL/api";
+import {FormDataType} from "../UI/auth/Login";
 
 const AUTH_SUCCESS = "TODOLIST_TS/AuthReducer/AUTH_SUCCESS"
 const AUTH_FAIL = "TODOLIST_TS/AuthReducer/AUTH_FAIL"
@@ -17,10 +18,8 @@ type InitialStateType = typeof initialState
 export const AuthReducer = (state: InitialStateType = initialState, action: ActionType) => {
     switch (action.type) {
         case AUTH_SUCCESS:
-            debugger
             return {...state, email: action.email, login: action.login, userId: action.userId, isAuth: true}
         case AUTH_FAIL:
-            debugger
             return {...state, email: null, login: null, userId: null, isAuth: false}
 
         default:
@@ -57,28 +56,24 @@ const setAuthFail = (): SetAuthFailType => ({type: AUTH_FAIL})
 
 export const Autorization = () => {
     return async (dispatch: Dispatch<ActionType>) => {
-        debugger
-        let res = await API.checkAuth()
         try {
-            debugger
+            let res = await API.checkAuth()
             if (res.resultCode === 0) {
                 dispatch(setAuthSuccess(res.data))
             } else {
                 dispatch(setAuthFail())
             }
         } catch (e) {
-            debugger
-            console.log(e)
+            alert(e)
         }
         // dispatch(setAuthSuccess({email: "fdsfsdfsd", login: "fdsfs", userId: 21312}))
     }
 }
 
-export const LogIn = () => {
+export const LogIn = (formData: FormDataType) => {
     return async (dispatch: Dispatch<ActionType>) => {
-        let res = await API.setAuth()
         try {
-            debugger
+            let res = await API.setAuth(formData)
             if (res.resultCode === 0) dispatch(Autorization())
         } catch (e) {
             alert(e)
@@ -89,12 +84,9 @@ export const LogIn = () => {
 export const LogOut = () => {
 
     return async (dispatch: Dispatch<ActionType>) => {
-        debugger
-        let res = await API.delAuth()
         try {
+            let res = await API.delAuth()
             console.log(res)
-            debugger
-
             if (res.resultCode === 0) dispatch(setAuthFail())
         } catch (e) {
             alert(e)

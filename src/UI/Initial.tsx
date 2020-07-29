@@ -31,21 +31,22 @@ class Initial extends React.Component<MapDispatchToPropsType & MapStateToPropsTy
     render = () => {
 
         return (
-            <div style={{display: "flex", flexDirection: "column"}}>
+            <div style={{backgroundImage: "url(https://ismile-service.ru/images/bg20.jpg)"}}>
                 <HeaderBlock/>
-                <Route path={'/login'} component={Login}/>
+                <div style={{minHeight: "80vh"}}>
+                    <Route path={'/login'} component={Login}/>
 
-                <Route path={'/'}
-                       render={() => {
-                           // debugger
-                           if (!this.props.isAuth) return <Redirect to={"/login"}/>
+                    <Route path={'/'}
+                           render={() => {
+                               // debugger
+                               if (!this.props.isAuth) return <Redirect to={"/login"}/>
 
-                           return (
-                               <App/>
-                           )
-                       }}/>
+                               return (
+                                   <App/>
+                               )
+                           }}/>
 
-
+                </div>
             </div>
 
         );

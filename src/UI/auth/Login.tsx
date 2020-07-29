@@ -2,43 +2,76 @@ import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../BLL/store";
 import {Redirect} from "react-router-dom";
-import {Field, reduxForm} from "redux-form";
-export const Login=(props:any)=>{
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {Input} from "../common/formsComponets";
+import {email, maxLength25, maxLength10, requiredField} from "../common/validators";
+import {LogIn} from "../../BLL/AuthReducer";
 
-    let dispatch=useDispatch()
-    let isAuth=useSelector<AppStateType, boolean>(state=>state.auth.isAuth)
 
-
-    if (isAuth) return <Redirect to={"/"}/>
-    return(
-        <div>
-            <div>
-                <input type="text" placeholder={"login"}/>
-            </div>
-            <div>
-                <input type="text" placeholder={"password"}/>
-            </div>
-        </div>
-    )
+export type FormDataType = {
+    email: string
+    password: string
+    rememberMe?: boolean
 }
 
 
-const LoginForm=()=>{
-    return(
-        <div>
+//1
+const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
+
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <div style={{
+                boxSizing: "border-box", padding: "15px", color: "white", backgroundColor: "#333", marginBottom:"15px", borderRadius:"5px"
+            }}>
+                <div><i>данные тестового аккаунта:</i></div>
+                <div>Email: <ins>free@samuraijs.com</ins></div>
+                <div>Password: <ins>free</ins></div>
+            </div>
             <div>
                 <Field type="text"
                        placeholder={"email"}
-                       // component={Input}
+                       component={Input}
+                       name={"email"}
+                       validate={[requiredField, email, maxLength25]}
+                />
+
+            </div>
+            <div>
+                <Field type="text"
+                       placeholder={"password"}
+                       component={Input}
+                       name={"password"}
+                       validate={[requiredField]}
                 />
             </div>
             <div>
-                <Field type="text" placeholder={"password"}/>
+                <Field type="checkbox"
+                       id="styled-checkbox-1"
+                       component={'input'}
+                       name={"checkbox"}/>
+                <label htmlFor="styled-checkbox-1">remember me</label>
             </div>
-            <div>
-                <Field type="checkbox" />
-                remember me
-            </div>
-        </div>
+            <button className={"butt"}>Login</button>
+        </form>
+    )
+}
+//2
+const ReduxLoginForm = reduxForm<FormDataType>({form: "login"})(LoginForm)
+
+//3
+export const Login: React.FC = () => {
+
+    let dispatch = useDispatch();
+    let isAuth = useSelector<AppStateType, boolean>(state => state.auth.isAuth);
+
+    const onSubmit = (formData: FormDataType) => {
+        // debugger
+        console.log("hey")
+        dispatch(LogIn(formData));
+    }
+
+    if (isAuth) return <Redirect to={"/"}/>
+    return (
+        <ReduxLoginForm onSubmit={onSubmit}/>
     )
 }

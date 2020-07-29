@@ -1,52 +1,125 @@
 
 .App {
-  display: flex;
-  flex-direction: row;
+    display: flex;
+    flex-direction: row;
 }
 
 .todoList {
-  border: 2px solid;
-  width: 300px;
-  margin: 0 auto;
-  margin-right: 20px;
-  background-color: #f0ccbc;
+    border: 2px solid;
+    width: 300px;
+    margin: 0 auto;
+    margin-right: 20px;
+    background-color: #f0ccbc;
 }
 
 .todoList-header {
-  padding: 10px;
-  position: relative;
+    padding: 10px;
+    position: relative;
 }
 
 .todoList-task {
-  opacity: 1;
+    opacity: 1;
 }
-.filter-active {background: red;}
-.btn:hover {background: yellow;}
-.btn:active {background: green;}
+
+.filter-active {
+    background: red;
+}
+
+.btn:hover {
+    background: yellow;
+}
+
+.btn:active {
+    background: green;
+}
+
 .error {
-  border-color: red;
+    border-color: red;
 }
+
 .done {
-  opacity: 0.5;
+    opacity: 0.5;
 }
-.taskContainer{
-  border-bottom: 2px dashed;
-  display: flex;
-  justify-content: space-between;
-margin-bottom: 15px;
+
+.taskContainer {
+    border-bottom: 2px dashed;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
 }
-.deleterTodo{
-  position: absolute;
-top: 5px;
-  right: 5px;
+
+.deleterTodo {
+    position: absolute;
+    top: 5px;
+    right: 5px;
 }
 
 .idTodo {
-  position: absolute;
-  top: 5px;
-  left: 5px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
 }
 
-.deleterTask{
-  margin-right: 5px;
+.deleterTask {
+    margin-right: 5px;
+}
+
+form {
+    margin: 50px auto 0px;
+    display: flex;
+    flex-direction: column;
+    background-color: #abae8e;
+    width: 350px;
+    border-radius: 10px;
+    padding: 15px;
+    box-sizing: border-box;
+    box-shadow: 2px -2px 5px #fefff8;
+}
+
+
+.wrapInp {
+    margin-bottom: 20px;
+}
+
+.wrapInp input {
+    width: 100%;
+    font-size: 14px;
+    color: #333;
+    padding: 0 16px 0 10px;
+    border: 1px solid #ebebeb;
+    outline: 0;
+    height: 40px;
+    border-radius: 4px;
+    margin-top: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    font-family: Roboto, Open Sans, Helvetica, Arial;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+
+}
+
+.error input {
+    outline: none;
+    border: 2px solid red;
+}
+
+.butt {
+    display: block;
+    height: 44px;
+    background: #272b32;
+    border: 0;
+    border-radius: 3px;
+    font-size: 14px;
+    line-height: 44px;
+    color: #fff;
+    text-transform: uppercase;
+    padding: 0;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+.butt:hover {
+    background: #3c4047;
 }

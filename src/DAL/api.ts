@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {FormDataType} from "../UI/auth/Login";
 
 const instance = axios.create({
     withCredentials: true,
@@ -11,9 +12,10 @@ export const API = {
     checkAuth() {
         return instance.get(`auth/me`).then(res => res.data)
     },
-    setAuth() {
+    setAuth(formData:FormDataType) {
+        debugger
         return instance.post(`auth/login`,
-            {email:"dimatuz94@gmail.com", password:"dimatuzit309", rememberMe:false }
+            {email:formData.email, password:formData.password, rememberMe:formData.rememberMe }
         ).then(res => res.data)
     },
     delAuth() {

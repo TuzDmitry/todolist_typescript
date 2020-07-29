@@ -8,6 +8,7 @@ import {addTodoList, getTodolists} from "../BLL/TodoListReducer";
 import {AppStateType} from "../BLL/store";
 import Preloader from './common/Preloader';
 import {TodoType} from "../types/entities";
+import {url} from "inspector";
 
 
 
@@ -50,7 +51,13 @@ class App extends React.Component<MapDispatchToPropsType & MapStateToPropsType> 
             return <TodoList key={tl.id} id={tl.id} title={tl.title} tasks={tl.tasks}/>
         })
         return (
-            <div style={{backgroundColor: "red"}}>
+            <div
+            //     style={{
+            //     // backgroundColor: "rgba(28,41,41,0.87)",
+            //     backgroundImage: "url(https://ismile-service.ru/images/bg20.jpg)",
+            //     minHeight:"80vh"
+            // }}
+            >
                 <Preloader isPreloader={this.props.isPreloaderTodo}/>
                 <div>
                     <AddNewItemForm addItem={this.addTodoList}/>

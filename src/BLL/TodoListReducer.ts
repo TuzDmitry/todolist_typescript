@@ -263,7 +263,7 @@ export const changePreloaderTasksAC = (isPreloader: boolean): ChangePreloaderTas
 export const getTodolists = () => {
     return (dispatch: Dispatch<TodoActionTypes>) => {
         dispatch(changePreloaderTodoAC(true))
-        debugger
+        // debugger
         api.getTodolists()
             .then(res => {
                 dispatch(setTodoListsSuccess(res.data))
