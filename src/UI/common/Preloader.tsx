@@ -1,17 +1,17 @@
-import React from "react";
+import React from 'react';
 import preloader from '../../assets/images/preloader.gif'
 
 
-type OwnPropsType={
+type OwnPropsType = {
     isPreloader: boolean
 }
 
-const Preloader = (props:OwnPropsType) => {
+const Preloader = (props: OwnPropsType) => {
     return (
         <>
             {props.isPreloader && <div>
-            <img src={preloader} alt=""/>
-        </div>}
+                <img src={preloader} alt=""/>
+            </div>}
         </>
     )
 }

@@ -20,14 +20,12 @@ export const HeaderBlock = () => {
     };
 
     let onLogOutClick = () => {
-        debugger
         dispatch(LogOut())
-
     }
 
     return (
         <div style={divStyle}>
-            <div style={{float: "right", padding: "15px", color: "white"}}>
+            <div style={{float: 'right', padding: '15px', color: 'white'}}>
                 {
                     isAuth ?
                         <>

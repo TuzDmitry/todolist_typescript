@@ -1,15 +1,15 @@
-import {Dispatch} from "redux";
-import {API} from "../DAL/api";
-import {FormDataType} from "../UI/auth/Login";
+import {Dispatch} from 'redux';
+import {API} from '../DAL/api';
+import {FormDataType} from '../UI/auth/Login';
 
-const AUTH_SUCCESS = "TODOLIST_TS/AuthReducer/AUTH_SUCCESS"
-const AUTH_FAIL = "TODOLIST_TS/AuthReducer/AUTH_FAIL"
+const AUTH_SUCCESS = 'TODOLIST_TS/AuthReducer/AUTH_SUCCESS'
+const AUTH_FAIL = 'TODOLIST_TS/AuthReducer/AUTH_FAIL'
 
 let initialState = {
     userId: null,
     login: null,
     email: null,
-    isAuth: true
+    isAuth: false
 }
 
 type InitialStateType = typeof initialState
@@ -66,7 +66,6 @@ export const Autorization = () => {
         } catch (e) {
             alert(e)
         }
-        // dispatch(setAuthSuccess({email: "fdsfsdfsd", login: "fdsfs", userId: 21312}))
     }
 }
 
@@ -86,7 +85,6 @@ export const LogOut = () => {
     return async (dispatch: Dispatch<ActionType>) => {
         try {
             let res = await API.delAuth()
-            console.log(res)
             if (res.resultCode === 0) dispatch(setAuthFail())
         } catch (e) {
             alert(e)

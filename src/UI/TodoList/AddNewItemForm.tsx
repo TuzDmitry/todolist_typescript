@@ -1,53 +1,49 @@
-import React, {ChangeEvent, KeyboardEvent} from "react";
-
+import React, {ChangeEvent, KeyboardEvent} from 'react';
 
 type StateType = {
     error: boolean
     title: string
 }
 
-type OwnPropsType={
-    addItem: (title: string)=>void
+type OwnPropsType = {
+    addItem: (title: string) => void
 }
 
 class AddNewItemForm extends React.Component<OwnPropsType, StateType> {
 
     state: StateType = {
         error: true,
-        title: ""
+        title: ''
     }
 
     onAddItemClick = () => {
 
         let newText = this.state.title;
-        this.setState({title: ""})
+        this.setState({title: ''})
 
-        if (newText === "") {
+        if (newText === '') {
             this.setState({error: true})
         } else {
             this.setState({error: false})
-            this.props.addItem(newText); //вызвали ту ф-ю в родит. компоненте и подали в нее записаное в переменную newText значение инпута!
+            this.props.addItem(newText);
         }
-
-
     }
 
-    onTitleChanged = (e:ChangeEvent<HTMLInputElement>) => {
+    onTitleChanged = (e: ChangeEvent<HTMLInputElement>) => {
         this.setState({
             error: false,
             title: e.currentTarget.value
         })
     };
 
-    onKeyPress = (e:KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === "Enter") {
+    onKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
             this.onAddItemClick()
         }
     };
 
-
     render = () => {
-        let classNameInput = this.state.error ? "error" : "";
+        let classNameInput = this.state.error ? 'error' : '';
         return (
             <div className="todoList-newTaskForm">
                 <input
@@ -57,8 +53,6 @@ class AddNewItemForm extends React.Component<OwnPropsType, StateType> {
                     value={this.state.title}
                     onKeyPress={this.onKeyPress}
                     placeholder="New item name"/>
-
-                {/*по клику на кнопку произойдет вызов ф-ии onAddItemClick*/}
                 <button onClick={this.onAddItemClick}>Add</button>
             </div>
         );

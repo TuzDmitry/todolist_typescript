@@ -1,17 +1,17 @@
-import React, {useState} from "react";
+import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../BLL/store";
 import {Redirect} from "react-router-dom";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Input} from "../common/formsComponets";
-import {email, maxLength25, maxLength10, requiredField} from "../common/validators";
+import {email, maxLength25,  requiredField} from "../common/validators";
 import {LogIn} from "../../BLL/AuthReducer";
 
 
 export type FormDataType = {
     email: string
     password: string
-    rememberMe?: boolean
+    rememberMe: boolean
 }
 
 
@@ -48,7 +48,7 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
                 <Field type="checkbox"
                        id="styled-checkbox-1"
                        component={'input'}
-                       name={"checkbox"}/>
+                       name={"rememberMe"}/>
                 <label htmlFor="styled-checkbox-1">remember me</label>
             </div>
             <button className={"butt"}>Login</button>
@@ -65,8 +65,6 @@ export const Login: React.FC = () => {
     let isAuth = useSelector<AppStateType, boolean>(state => state.auth.isAuth);
 
     const onSubmit = (formData: FormDataType) => {
-        // debugger
-        console.log("hey")
         dispatch(LogIn(formData));
     }
 

@@ -1,7 +1,7 @@
 export const requiredField = (val: any) => {
     return val
         ? undefined
-        : "line is required"
+        : 'line is required'
 }
 
 const maxLength = (max: any) => {
