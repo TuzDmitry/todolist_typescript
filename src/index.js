@@ -9,7 +9,7 @@ import Initial from "./UI/Initial";
 
 ReactDOM.render(<Provider store={store}>
 
-    <HashRouter>
+    <HashRouter basename={process.env.PUBLIC_URL}>
         <Initial/>
     </HashRouter>
 </Provider>, document.getElementById('root'));
