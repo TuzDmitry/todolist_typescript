@@ -1,15 +1,13 @@
 import React from 'react';
 import './App.css';
 
-
-import {connect} from "react-redux";
-import {AppStateType} from "../BLL/store";
+import {connect} from 'react-redux';
+import {AppStateType} from '../BLL/store';
 import {HeaderBlock} from './header/HeaderBlock';
 import {Route, Redirect} from 'react-router-dom';
-import {Login} from "./auth/Login";
-import {API} from "../DAL/api";
-import {Autorization} from "../BLL/AuthReducer";
-import App from "./App";
+import {Login} from './auth/Login';
+import {Autorization} from '../BLL/AuthReducer';
+import App from './App';
 
 
 type MapDispatchToPropsType = {
@@ -31,19 +29,14 @@ class Initial extends React.Component<MapDispatchToPropsType & MapStateToPropsTy
     render = () => {
 
         return (
-            <div style={{backgroundImage: "url(https://ismile-service.ru/images/bg20.jpg)"}}>
+            <div style={{backgroundImage: 'url(https://ismile-service.ru/images/bg20.jpg)'}}>
                 <HeaderBlock/>
-                <div style={{minHeight: "80vh"}}>
+                <div style={{minHeight: '80vh'}}>
                     <Route path={'/login'} component={Login}/>
-
                     <Route path={'/'}
                            render={() => {
-                               // debugger
-                               if (!this.props.isAuth) return <Redirect to={"/login"}/>
-
-                               return (
-                                   <App/>
-                               )
+                               if (!this.props.isAuth) return <Redirect to={'/login'}/>
+                               return <App/>
                            }}/>
 
                 </div>
