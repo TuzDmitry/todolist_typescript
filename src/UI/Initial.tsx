@@ -9,6 +9,7 @@ import {Route, Redirect} from 'react-router-dom';
 import {Login} from './auth/Login';
 import {Autorization} from '../BLL/AuthReducer';
 import App from './App';
+import {Container} from '@material-ui/core';
 
 
 type MapDispatchToPropsType = {
@@ -30,19 +31,20 @@ class Initial extends React.Component<MapDispatchToPropsType & MapStateToPropsTy
     render = () => {
 
         return (
-            <div style={{backgroundImage: 'url(https://1.bp.blogspot.com/-87h7BkqdSAw/UxK2VKhQheI/AAAAAAAAJSo/sbeFofTMYOg/s1600/368904.jpg)'}}>
+            <div
+                style={{backgroundImage: 'url(https://1.bp.blogspot.com/-87h7BkqdSAw/UxK2VKhQheI/AAAAAAAAJSo/sbeFofTMYOg/s1600/368904.jpg)'}}>
                 <HeaderBlock/>
-                <div style={{minHeight: '80vh'}}>
+                <Container
+                    // fixed
+                >
                     <Route path={'/login'} component={Login}/>
                     <Route path={'/'}
                            render={() => {
                                if (!this.props.isAuth) return <Redirect to={'/login'}/>
                                return <App/>
-                           }}/>
+                           }}/></Container>
 
-                </div>
             </div>
-
         );
     }
 }

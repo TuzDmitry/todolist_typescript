@@ -1,12 +1,13 @@
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent} from 'react';
+import {TextField} from '@material-ui/core';
 
-type OwnPropsType={
-    title:string
-    id:string
-    changeTodoTitle:(id:string, memoryTitle:string)=>void
+type OwnPropsType = {
+    title: string
+    id: string
+    changeTodoTitle: (id: string, memoryTitle: string) => void
 }
 
-class TodoListTitle extends React.Component <OwnPropsType>{
+class TodoListTitle extends React.Component <OwnPropsType> {
 
     state = {
         editMode: false,
@@ -28,7 +29,7 @@ class TodoListTitle extends React.Component <OwnPropsType>{
             editMode: false
         })
     }
-    onTitleChanged = (e:ChangeEvent<HTMLInputElement>) => {
+    onTitleChanged = (e: ChangeEvent<HTMLInputElement>) => {
         this.setState({
             memoryTitle: e.currentTarget.value
         })
@@ -40,10 +41,16 @@ class TodoListTitle extends React.Component <OwnPropsType>{
 
                 {
                     this.state.editMode
-                        ? <input onBlur={this.deActivateEditMode}
-                                 onChange={this.onTitleChanged}
-                                 value={this.state.memoryTitle}
-                                 autoFocus={true}/>
+                        ?
+                        // <input onBlur={this.deActivateEditMode}
+                        //          onChange={this.onTitleChanged}
+                        //          value={this.state.memoryTitle}
+                        //          autoFocus={true}/>
+                        <TextField
+                            onBlur={this.deActivateEditMode}
+                            onChange={this.onTitleChanged}
+                            value={this.state.memoryTitle}
+                            autoFocus={true}/>
                         : <h3 onClick={this.activateEditMode} className="todoList-header_title">{this.props.title}</h3>
                 }
             </>

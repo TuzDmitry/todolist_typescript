@@ -1,8 +1,29 @@
-import React, {CSSProperties} from "react";
-import {NavLink} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {AppStateType} from "../../BLL/store";
-import {LogOut} from "../../BLL/AuthReducer";
+import React, {CSSProperties} from 'react';
+import {NavLink} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppStateType} from '../../BLL/store';
+import {LogOut} from '../../BLL/AuthReducer';
+import {AppBar, Button, IconButton, Typography, makeStyles, Theme, createStyles} from '@material-ui/core';
+import Toolbar from '@material-ui/core/Toolbar';
+import {Menu} from '@material-ui/icons';
+
+
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        root: {
+            flexGrow: 1,
+        },
+        menuButton: {
+            marginRight: theme.spacing(2),
+        },
+        title: {
+            flexGrow: 1,
+        },
+        userName:{
+            marginRight: 10
+        }
+    }),
+);
 
 export const HeaderBlock = () => {
 
@@ -10,33 +31,34 @@ export const HeaderBlock = () => {
     const User = useSelector<AppStateType, string>(state => state.auth.login)
     const dispatch = useDispatch();
 
-    const divStyle: CSSProperties = {
-        boxSizing: "border-box",
-        padding: "10px",
-        backgroundColor: "rgba(29, 32, 38, 0.87)",
-        height: "80px",
-        borderTopLeftRadius: "15px",
-        border: "1px solid black"
-    };
 
-    let onLogOutClick = () => {
-        dispatch(LogOut())
-    }
+    let onLogOutClick = () => dispatch(LogOut())
+
+    const classes = useStyles();
 
     return (
-        <div style={divStyle}>
-            <div style={{float: 'right', padding: '15px', color: 'white'}}>
-                {
-                    isAuth ?
-                        <>
-                            <span style={{marginRight:"10px"}}>{User}</span>
-                            <button onClick={onLogOutClick}>LOGOUT</button>
-                        </>
-                        :
-                        <NavLink to={"/login"}>LOGIN</NavLink>
-                }
+            <div className={classes.root}>
+                <AppBar position="static">
+                    <Toolbar>
+                        <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                            <Menu/>
+                        </IconButton>
+                        <Typography variant="h6" className={classes.title}>
+                            News
+                        </Typography>
+
+                        {
+                            isAuth ?
+                                <>
+                                    <span className={classes.userName}>{User}</span>
+                                    <Button  color="inherit" onClick={onLogOutClick}>LOGOUT</Button>
+                                </>
+                                :
+                                <Button color="inherit"><NavLink to={'/login'}>LOGIN</NavLink></Button>
+                                    }
+                    </Toolbar>
+                </AppBar>
             </div>
-        </div>
     )
 }
 

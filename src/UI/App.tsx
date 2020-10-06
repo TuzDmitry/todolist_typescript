@@ -7,6 +7,7 @@ import {addTodoList, getTodolists} from '../BLL/TodoListReducer';
 import {AppStateType} from '../BLL/store';
 import Preloader from './common/Preloader';
 import {TodoType} from '../types/entities';
+import {Grid, Paper} from '@material-ui/core';
 
 type MapDispatchToPropsType = {
     getTodolists: () => void
@@ -35,7 +36,9 @@ class App extends React.Component<MapDispatchToPropsType & MapStateToPropsType> 
 
     render = () => {
         let todolists = this.props.todolists.map(tl => {
-            return <TodoList key={tl.id} id={tl.id} title={tl.title} tasks={tl.tasks}/>
+            return <Grid item color={'red'}><Paper style={{backgroundColor:'#e3e5eb', padding:'10px'}}>
+                <TodoList key={tl.id} id={tl.id} title={tl.title} tasks={tl.tasks}/>
+            </Paper></Grid>
         })
         return (
             <div>
@@ -43,9 +46,11 @@ class App extends React.Component<MapDispatchToPropsType & MapStateToPropsType> 
                 <div>
                     <AddNewItemForm addItem={this.addTodoList}/>
                 </div>
-                <div className="App">
+                <Grid container spacing={3}>
+                    {/*<div className="App">*/}
                     {todolists}
-                </div>
+                    {/*</div>*/}
+                </Grid>
             </div>
         )
     }
