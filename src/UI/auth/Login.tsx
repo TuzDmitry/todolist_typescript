@@ -44,12 +44,12 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
                        validate={[requiredField]}
                 />
             </div>
-            <div>
+            <div className={"wrapperField"}>
                 <Field type="checkbox"
                        id="styled-checkbox-1"
                        component={'input'}
                        name={"rememberMe"}/>
-                <label htmlFor="styled-checkbox-1">remember me</label>
+                <label htmlFor="styled-checkbox-1">Remember me</label>
             </div>
             <button className={"butt"}>Login</button>
         </form>

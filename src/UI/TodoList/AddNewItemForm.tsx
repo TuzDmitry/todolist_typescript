@@ -1,4 +1,8 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
+import {Button, IconButton, TextField} from '@material-ui/core';
+import {AddOutlined} from '@material-ui/icons'
+import {DeleteOutlined} from '@material-ui/icons';
+
 
 type StateType = {
     error: boolean
@@ -12,7 +16,7 @@ type OwnPropsType = {
 class AddNewItemForm extends React.Component<OwnPropsType, StateType> {
 
     state: StateType = {
-        error: true,
+        error: false,
         title: ''
     }
 
@@ -46,14 +50,30 @@ class AddNewItemForm extends React.Component<OwnPropsType, StateType> {
         let classNameInput = this.state.error ? 'error' : '';
         return (
             <div className="todoList-newTaskForm">
-                <input
+                {/*<input*/}
+                {/*    type="text"*/}
+                {/*    className={classNameInput}*/}
+                {/*    onChange={this.onTitleChanged}*/}
+                {/*    value={this.state.title}*/}
+                {/*    onKeyPress={this.onKeyPress}*/}
+                {/*    placeholder="New item name"/>*/}
+                <TextField
                     type="text"
-                    className={classNameInput}
+                    variant="outlined"
+                    helperText={this.state.error ? "Empty name.":''}
+                    error={this.state.error}
                     onChange={this.onTitleChanged}
                     value={this.state.title}
                     onKeyPress={this.onKeyPress}
-                    placeholder="New item name"/>
-                <button onClick={this.onAddItemClick}>Add</button>
+                    label={"New item name"} />
+                <IconButton aria-label="add"
+                            onClick={this.onAddItemClick}>
+                    <AddOutlined color="primary"/>
+                </IconButton>
+                {/*<Button variant={'contained'} color={'primary'} size={'small'}*/}
+                {/*        onClick={this.onAddItemClick}>Add</Button>*/}
+
+
             </div>
         );
     }

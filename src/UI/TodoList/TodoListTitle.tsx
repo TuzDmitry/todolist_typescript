@@ -44,7 +44,7 @@ class TodoListTitle extends React.Component <OwnPropsType>{
                                  onChange={this.onTitleChanged}
                                  value={this.state.memoryTitle}
                                  autoFocus={true}/>
-                        : <h3 onClick={this.activateEditMode} className="todoList-header__title">{this.props.title}</h3>
+                        : <h3 onClick={this.activateEditMode} className="todoList-header_title">{this.props.title}</h3>
                 }
             </>
 

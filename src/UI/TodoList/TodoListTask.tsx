@@ -1,5 +1,7 @@
 import React, {ChangeEvent} from "react"
 import {TaskType} from "../../types/entities";
+import {DeleteOutlined} from '@material-ui/icons';
+import {FormControlLabel, IconButton, Checkbox} from '@material-ui/core';
 
 type OwnPropsType = {
     deleteTask: (taskId: string) => void
@@ -9,11 +11,16 @@ type OwnPropsType = {
     task: TaskType
 }
 
+type StateType = {
+    editMode: boolean,
+    memoryTitle: string,
+    editPriorityMode: boolean
+}
 
-class TodoListTask extends React.Component <OwnPropsType> {
+class TodoListTask extends React.Component <OwnPropsType,StateType> {
 
 
-    state = {
+    state:StateType = {
         editMode: false,
         memoryTitle: '',
         editPriorityMode: false
@@ -82,10 +89,15 @@ class TodoListTask extends React.Component <OwnPropsType> {
             <div>
                 <div className="taskContainer">
                     <div className={classForIsDone}>
-                        <span>{this.props.task.id.slice(0, 4)}</span>
-                        <input type="checkbox" onChange={this.onIsDoneChanged} checked={statusTasks === 2}/>
+                        {/*<input type="checkbox" onChange={this.onIsDoneChanged} checked={statusTasks === 2}/>*/}
 
-                        {/*<div>{this.props.task.id}</div>*/}
+                        <Checkbox
+                            onChange={this.onIsDoneChanged}
+                            checked={statusTasks === 2}
+                            color="primary"
+                        />
+
+
                         {
                             this.state.editMode
                                 ? <input onBlur={this.deActivateEditMode}
@@ -116,7 +128,10 @@ class TodoListTask extends React.Component <OwnPropsType> {
                             }
                         </span>
                     </div>
-                    <button className="deleterTask" onClick={this.onClickClose}>x</button>
+                    {/*<button className="deleterTask" onClick={this.onClickClose}>x</button>*/}
+                    <IconButton onClick={this.onClickClose} className="deleterTask">
+                        <DeleteOutlined/>
+                    </IconButton>
                 </div>
             </div>
         );

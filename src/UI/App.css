@@ -1,68 +1,75 @@
 
-.App {
-    display: flex;
-    flex-direction: row;
-}
+/*.App {*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*}*/
 
-.todoList {
-    border: 2px solid;
-    width: 300px;
-    margin: 0 auto;
-    margin-right: 20px;
-    background-color: #f0ccbc;
-}
+/*.todoList {*/
+/*    border: 2px solid;*/
+/*    width: 300px;*/
+/*    margin: 0 auto;*/
+/*    margin-right: 20px;*/
+/*    background-color: #f0ccbc;*/
+/*}*/
 
-.todoList-header {
-    padding: 10px;
-    position: relative;
-}
 
-.todoList-task {
-    opacity: 1;
-}
+/*.todoList-header {*/
+/*    padding: 10px;*/
+/*    position: relative;*/
+/*}*/
+/*.todoList-footer {*/
+/*    background: rgba(125, 255, 86, 0.62);*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    align-items: center;*/
+/*}*/
 
-.filter-active {
-    background: red;
-}
+/*.todoList-header_title{*/
+/*    word-break: break-word;*/
+/*}*/
 
-.btn:hover {
-    background: yellow;
-}
+/*.todoList-task {*/
+/*    opacity: 1;*/
+/*}*/
 
-.btn:active {
-    background: green;
-}
+/*.filter-active {*/
+/*    background: red;*/
+/*}*/
 
-.error {
-    border-color: red;
-}
+/*.btn:hover {*/
+/*    background: yellow;*/
+/*}*/
 
-.done {
-    opacity: 0.5;
-}
+/*.btn:active {*/
+/*    background: green;*/
+/*}*/
 
-.taskContainer {
-    border-bottom: 2px dashed;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
-}
+/*.error {*/
+/*    border-color: red;*/
+/*}*/
 
-.deleterTodo {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-}
+/*.done {*/
+/*    opacity: 0.5;*/
+/*}*/
 
-.idTodo {
-    position: absolute;
-    top: 5px;
-    left: 5px;
-}
+/*.taskContainer {*/
+/*    border-bottom: 2px dashed;*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    margin-bottom: 15px;*/
+/*}*/
 
-.deleterTask {
-    margin-right: 5px;
-}
+/*.deleterTodo {*/
+/*    !*position: absolute;*!*/
+/*    !*top: 5px;*!*/
+/*    !*right: 5px;*!*/
+/*    !*align-self: center;*!*/
+/*}*/
+
+
+/*.deleterTask {*/
+/*    margin-right: 5px;*/
+/*}*/
 
 form {
     margin: 50px auto 0px;
@@ -73,7 +80,7 @@ form {
     border-radius: 10px;
     padding: 15px;
     box-sizing: border-box;
-    box-shadow: 2px -2px 5px #fefff8;
+    box-shadow: 0px 0px 3px #2a1e1e;
 }
 
 
@@ -96,13 +103,25 @@ form {
     -webkit-appearance: none;
     font-family: Roboto, Open Sans, Helvetica, Arial;
     -webkit-box-shadow: none;
-    box-shadow: none;
 
+}
+
+.wrapInp input:hover, input[type="checkbox"]:hover{
+    box-shadow: 0px 0px 5px black;
 }
 
 .error input {
     outline: none;
     border: 2px solid red;
+}
+
+.wrapperField{
+    display: flex;
+    align-items: center;
+}
+.wrapperField input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
 }
 
 .butt {

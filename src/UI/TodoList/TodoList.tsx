@@ -13,11 +13,15 @@ import {
 import Preloader from '../common/Preloader';
 import {TaskType, UpadateTaskType} from '../../types/entities';
 import {AppStateType} from '../../BLL/store';
+import {DeleteOutlined} from '@material-ui/icons';
+import {IconButton} from '@material-ui/core';
 
+type StateType = {
+    filterValue: string
+}
 
 type OwnPropsType = {
     tasks: Array<TaskType>
-    isPreloaderTasks: boolean
     id: string
     title: string
 }
@@ -35,8 +39,13 @@ type MapDispatchToPropsType = {
     changeTask: (task: TaskType, newPropsObj: UpadateTaskType) => void
 }
 
+type PropsType = OwnPropsType & MapDispatchToPropsType & MapStateToPropsType
 
-class TodoList extends React.Component <OwnPropsType & MapDispatchToPropsType & MapStateToPropsType> {
+class TodoList extends React.Component <PropsType, StateType> {
+
+    state: StateType = {
+        filterValue: 'All'
+    }
 
     componentDidMount() {
         this.restoreState()
@@ -44,12 +53,6 @@ class TodoList extends React.Component <OwnPropsType & MapDispatchToPropsType & 
 
     restoreState = () => {
         this.props.getTasks(this.props.id)
-    }
-
-    state = {
-        tasks: [
-            // {id: 1, title: "JS", isDone: true, priority: 'low'},
-        ], filterValue: 'All'
     }
 
     deleteTodolist = () => {
@@ -98,12 +101,13 @@ class TodoList extends React.Component <OwnPropsType & MapDispatchToPropsType & 
             <div className="App">
                 <div className="todoList">
                     <div className="todoList-header">
-                        <TodoListTitle title={this.props.title}
-                                       id={this.props.id}
-                                       changeTodoTitle={this.changeTodoTitle}/>
-                        <div>
-                            <span className="idTodo">{`# ${this.props.id.slice(0, 4)}`}</span>
-                            <button className="deleterTodo" onClick={this.deleteTodolist}>x</button>
+                        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'baseline'}}>
+                            <TodoListTitle title={this.props.title}
+                                           id={this.props.id}
+                                           changeTodoTitle={this.changeTodoTitle}/>
+                            <IconButton onClick={this.deleteTodolist} className="deleterTodo">
+                                <DeleteOutlined/>
+                            </IconButton>
                         </div>
                         <AddNewItemForm addItem={this.addTask}/>
                     </div>
