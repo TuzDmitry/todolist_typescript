@@ -1,18 +1,8 @@
-import React, {ChangeEvent, ReactNode} from 'react'
+import React, {ChangeEvent} from 'react'
 import {TaskType} from '../../types/entities';
 import {DeleteOutlined} from '@material-ui/icons';
-import {
-    FormControlLabel,
-    IconButton,
-    Checkbox,
-    Box,
-    Paper,
-    Select,
-    MenuItem,
-    Input,
-    TextField
-} from '@material-ui/core';
-import {zhCN} from '@material-ui/core/locale';
+import Rating from '@material-ui/lab/Rating';
+import {IconButton, Checkbox, Box, Paper, Select, MenuItem, TextField} from '@material-ui/core';
 
 type OwnPropsType = {
     deleteTask: (taskId: string) => void
@@ -25,15 +15,24 @@ type OwnPropsType = {
 type StateType = {
     editMode: boolean,
     memoryTitle: string,
-    editPriorityMode: boolean
+    hover: number
 }
+
+
+const labels: { [index: string]: string } = {
+    1: 'low',
+    2: 'middle',
+    3: 'hi',
+    4: 'urgently',
+    5: 'later',
+};
 
 class TodoListTask extends React.Component <OwnPropsType, StateType> {
 
     state: StateType = {
         editMode: false,
         memoryTitle: '',
-        editPriorityMode: false
+        hover: -1
     }
 
     onIsDoneChanged = (e: ChangeEvent<HTMLInputElement>) => {
@@ -51,7 +50,6 @@ class TodoListTask extends React.Component <OwnPropsType, StateType> {
         this.props.deleteTask(this.props.task.id)
     }
 
-
     activateEditMode = () => {
         this.setState({
             editMode: true,
@@ -66,18 +64,11 @@ class TodoListTask extends React.Component <OwnPropsType, StateType> {
         })
     }
 
-    // onPriorityChanged = (event:ChangeEvent<HTMLSelectElement>) => {
-    //     let value = event.currentTarget.value;
-    //     debugger
-    //     this.props.changePriority(this.props.task, value)
-    // }
 
-
-    onPriorityChanged = (event: React.ChangeEvent<{ value: unknown }>) => {
-        // setAge(event.target.value as string);
-        let value = event.target.value;
+    onPriorityChangedRating = (event: ChangeEvent<{}>, newValue: number | null) => {
         debugger
-        this.props.changePriority(this.props.task, value)
+        let a = newValue? newValue - 1 : null
+        this.props.changePriority(this.props.task, a)
     }
 
 
@@ -85,33 +76,11 @@ class TodoListTask extends React.Component <OwnPropsType, StateType> {
         let statusTasks = this.props.task.status
         let classForIsDone = statusTasks === 2 ? 'done' : 'todoList-task';
         let styleIsDone = statusTasks === 2 ? {opacity: 0.5} : {};
-        let priora;
-        switch (this.props.task.priority) {
-            case 0:
-                priora = 'low'
-                break
-            case 1:
-                priora = 'middle'
-                break
-            case 2:
-                priora = 'hi'
-                break
-            case 3:
-                priora = 'urgently'
-                break
-            case 4:
-                priora = 'later'
-                break
-            default:
-                priora = 'smth strange'
-        }
 
         return (
-            <Paper style={{marginTop:'10px'}}>
+            <Paper style={{marginTop: '10px'}}>
 
-                {/*<div className="taskContainer">*/}
                 <div className={classForIsDone} style={{display: 'flex', alignItems: 'center', ...styleIsDone}}>
-                    {/*<input type="checkbox" onChange={this.onIsDoneChanged} checked={statusTasks === 2}/>*/}
 
                     <Checkbox
                         onChange={this.onIsDoneChanged}
@@ -123,10 +92,7 @@ class TodoListTask extends React.Component <OwnPropsType, StateType> {
                     <div style={{display: 'flex', flexDirection: 'column', flexGrow: 1, width: '170px'}}>{
                         this.state.editMode
                             ?
-                            // <input onBlur={this.deActivateEditMode}
-                            //          onChange={this.onTitleChanged}
-                            //          value={this.state.memoryTitle}
-                            //          autoFocus={true}/>
+
                             <TextField size={'small'}
                                        style={{width: '170px'}}
                                        onBlur={this.deActivateEditMode}
@@ -137,36 +103,28 @@ class TodoListTask extends React.Component <OwnPropsType, StateType> {
                                     style={{wordBreak: 'break-word'}}>-{this.props.task.title}, </span>
                     }
 
-                        <span>priority:
-                            {
-                                this.state.editPriorityMode
-                                    ?
-                                    <Select
-                                        autoFocus={true}
-                                        value={this.props.task.priority}
-                                        onBlur={() => this.setState({editPriorityMode: false})}
-                                        onChange={this.onPriorityChanged}
-                                    >
-                                        <MenuItem value={0}>low</MenuItem>
-                                        <MenuItem value={1}>middle</MenuItem>
-                                        <MenuItem value={2}>hi</MenuItem>
-                                        <MenuItem value={3}>urgently</MenuItem>
-                                        <MenuItem value={4}>later</MenuItem>
-                                    </Select>
-
-                                    : <span onClick={() => this.setState({editPriorityMode: true})}>
-                                        {priora}
-                                    </span>
-                            }
-                        </span>
+                        <div style={{
+                            width: 200,
+                            display: 'flex',
+                            alignItems: 'center',
+                        }}>
+                            <Rating
+                                id={this.props.task.id}
+                                value={this.props.task.priority + 1}
+                                precision={1}
+                                onChange={this.onPriorityChangedRating}
+                                onChangeActive={(event, newHover) => {
+                                    this.setState({hover: newHover})
+                                }}
+                            />
+                            {this.props.task.priority + 1 !== null && <Box
+                                ml={2}>{labels[this.state.hover !== -1 ? this.state.hover : this.props.task.priority + 1]}</Box>}
+                        </div>
                     </div>
                     <IconButton onClick={this.onClickClose} className="deleterTask">
                         <DeleteOutlined/>
                     </IconButton>
                 </div>
-                {/*<button className="deleterTask" onClick={this.onClickClose}>x</button>*/}
-
-                {/*</div>*/}
             </Paper>
         );
     }
